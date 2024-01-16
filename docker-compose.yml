@@ -1,0 +1,55 @@
+version: '3'
+
+services:
+  api-gateway:
+    build:
+      context: ./api-gateway
+      target: development
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./api-gateway:/usr/src/app
+    command: npm run start:dev
+    environment:
+      NODE_ENV: development
+
+  auth:
+    build:
+      context: ./auth
+      target: development
+    volumes:
+      - ./auth:/usr/src/app
+    command: npm run start:dev
+    environment:
+      NODE_ENV: development
+    depends_on:
+      - rabbitmq
+      # - postgres_auth  # Renamed the PostgreSQL service to avoid conflicts with other databases
+
+  # postgres_auth:
+  #   image: postgis/postgis:latest   # Use the PostGIS image
+  #   container_name: 'postgres_auth'
+  #   ports:
+  #     - "5432:5432"
+  #   environment:
+  #     POSTGRES_DB: 'user_db'
+  #     POSTGRES_USER: 'your_username'
+  #     POSTGRES_PASSWORD: 'your_password'
+  #   volumes:
+  #     - postgres_auth_data:/var/lib/postgresql/data  # Named volume for PostgreSQL data
+  #     - ./auth/initdb.d:/docker-entrypoint-initdb.d   # Mount the init script for PostGIS
+
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: 'rabbitmq'
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    volumes:
+      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
+      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+# volumes:
+  # postgres_auth_data:
+
+
