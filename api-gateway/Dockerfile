@@ -1,12 +1,12 @@
 ARG NODE_VERSION=18
 
 FROM node:${NODE_VERSION}-alpine AS base
-WORKDIR /usr/src/app
-# EXPOSE 3000
 
 ###################
 # BUILD FOR LOCAL DEVELOPMENT
 ###################
+
+WORKDIR /usr/src/app
 
 FROM base AS development
 
@@ -15,8 +15,8 @@ FROM base AS development
 # Copying this first prevents re-running npm install on every code change.
 COPY --chown=node:node package*.json ./
 
-# Install app dependencies using the `npm ci` command instead of `npm install`
-RUN npm ci && npm cache clean --force
+# Install ALL app dependencies, including 'devDependencies'
+RUN npm ci
 
 # Bundle app source
 COPY --chown=node:node . .
@@ -28,7 +28,9 @@ USER node
 # BUILD FOR PRODUCTION
 ###################
 
-FROM base AS build
+FROM development AS build
+
+#WORKDIR /usr/src/app
 
 COPY --chown=node:node package*.json ./
 
@@ -36,6 +38,9 @@ COPY --chown=node:node package*.json ./
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
 COPY --chown=node:node . .
+
+# the 'npm ci' cmd requires root access
+USER root
 
 # Run the build command which creates the production bundle
 RUN npm run build
@@ -57,7 +62,7 @@ FROM base AS production
 # Copy the bundled code from the build stage to the production image
 COPY --chown=node:node --from=build /usr/src/app/node_modules ./node_modules
 COPY --chown=node:node --from=build /usr/src/app/dist ./dist
+COPY --chown=node:node --from=build /usr/src/app/package*.json ./
 
 # Start the server using the production build
 CMD [ "node", "dist/main.js" ]
-
