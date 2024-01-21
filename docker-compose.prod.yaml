@@ -2,17 +2,19 @@ version: '3'
 
 services:
   api-gateway:
+    restart: on-failure
+    ports:
+      - "3000:3000"
     build:
       context: ./api-gateway
       target: production
-    ports:
-      - "3000:3000"
     environment:
       NODE_ENV: production
     volumes:
        - ./api-gateway:/usr/src/app
 
   auth:
+    restart: on-failure
     build:
       context: ./auth
       target: production
@@ -30,3 +32,17 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+
+  nginx:
+    build:
+      dockerfile: ./nginx/build/Dockerfile
+    command: [/bin/bash, ./nginx/build/command.sh]
+    ports:
+      - "443:443"
+      - "80:80"
+    volumes:
+      - ./nginx/conf:/etc/nginx/conf.d
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    depends_on:
+      - api-gateway
