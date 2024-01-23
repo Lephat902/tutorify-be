@@ -23,6 +23,16 @@ services:
     volumes:
        - ./auth:/usr/src/app
 
+  mailer:
+    restart: on-failure
+    build:
+      context: ./mailer
+      target: production
+    environment:
+      NODE_ENV: production
+    volumes:
+       - ./mailer:/usr/src/app
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
@@ -36,9 +46,7 @@ services:
   nginx:
     build:
       dockerfile: ./nginx/build/Dockerfile
-    command: [/bin/bash, ./nginx/build/command.sh]
     ports:
-      - "443:443"
       - "80:80"
     volumes:
       - ./nginx/conf:/etc/nginx/conf.d
