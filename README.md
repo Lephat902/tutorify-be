@@ -1,7 +1,12 @@
 ## 1. Cách chạy:
 Muốn chạy **development** thì:
-1. Vào thư mục `project`
-2. Gõ `docker compose -f docker-compose.dev.yml up --build`
+1. Vào thư mục `tutorify-be`
+2. Vào các thư mục chạy bằng NestJS như api-gateway, auth,... chạy lệnh sau:
+```bash
+npm ci
+npm run build
+```
+3. Ra thư mục gốc, gõ `docker compose -f docker-compose.dev.yml up --build`
 
 Muốn stop tất cả thì: `docker compose stop`
 
