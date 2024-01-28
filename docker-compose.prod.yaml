@@ -33,6 +33,16 @@ services:
     volumes:
        - ./mailer:/usr/src/app
 
+  verification-token:
+    restart: on-failure
+    build:
+      context: ./verification-token
+      target: production
+    environment:
+      NODE_ENV: production
+    volumes:
+       - ./verification-token:/usr/src/app
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
