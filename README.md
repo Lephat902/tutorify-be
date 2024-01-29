@@ -1,20 +1,15 @@
 ## 1. Cách chạy:
-Muốn chạy **development** thì:
+Chạy **development**:
 1. Vào thư mục `tutorify-be`
-2. Vào các thư mục chạy bằng NestJS như api-gateway, auth,... chạy lệnh sau:
-```bash
-npm ci
-npm run build
-```
-3. Ra thư mục gốc, gõ `docker compose -f docker-compose.dev.yml up --build`
+2. Gõ `docker compose -f docker-compose.dev.yaml up --build`
 
-Muốn stop tất cả thì: `docker compose stop`
+Muốn stop tất cả thì: `docker compose -f docker-compose.dev.yaml stop`
 
 Muốn stop một container nhất định thì:
 1. Kiếm id của nó qua lệnh `docker ps`
 2. Stop nó bằng `docker stop <id>`
 
-Ở môi trường **production** thì như **development**, chỉ khác là thay thế file compose thành `docker-compose.prod.yml`
+Ở môi trường **production** thì như **development**, chỉ khác là thay thế file compose thành `docker-compose.prod.yaml`
 
 ## 2. Về Quản lý Repo:
 Chúng ta sử dụng khái niệm submodule của git
