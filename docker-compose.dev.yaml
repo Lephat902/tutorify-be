@@ -1,6 +1,15 @@
 version: '3'
 
 services:
+  nest-cli:
+    image: node:18-alpine
+    command: npm install -g @nestjs/cli
+    volumes:
+      - .:/usr/src/app
+    working_dir: /usr/src/app
+    deploy:
+      replicas: 0
+
   api-gateway:
     build:
       context: ./api-gateway
@@ -11,7 +20,9 @@ services:
     environment:
       NODE_ENV: development
     volumes:
-       - ./api-gateway:/usr/src/app
+      - ./api-gateway:/usr/src/app
+    depends_on:
+      - nest-cli
 
   auth:
     build:
@@ -21,7 +32,9 @@ services:
     environment:
       NODE_ENV: development
     volumes:
-       - ./auth:/usr/src/app
+      - ./auth:/usr/src/app
+    depends_on:
+      - nest-cli
 
   mailer:
     build:
@@ -31,7 +44,9 @@ services:
     environment:
       NODE_ENV: development
     volumes:
-       - ./mailer:/usr/src/app
+      - ./mailer:/usr/src/app
+    depends_on:
+      - nest-cli
 
   verification-token:
     build:
@@ -41,7 +56,9 @@ services:
     environment:
       NODE_ENV: development
     volumes:
-       - ./verification-token:/usr/src/app
+      - ./verification-token:/usr/src/app
+    depends_on:
+      - nest-cli
 
   rabbitmq:
     image: rabbitmq:3-management-alpine

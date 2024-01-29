@@ -10,6 +10,7 @@ services:
       target: production
     environment:
       NODE_ENV: production
+    env_file: ./api-gateway/.env.example
     volumes:
        - ./api-gateway:/usr/src/app
 
@@ -20,6 +21,7 @@ services:
       target: production
     environment:
       NODE_ENV: production
+    env_file: ./auth/.env.example
     volumes:
        - ./auth:/usr/src/app
 
@@ -30,6 +32,7 @@ services:
       target: production
     environment:
       NODE_ENV: production
+    env_file: ./mailer/.env.example
     volumes:
        - ./mailer:/usr/src/app
 
@@ -40,6 +43,7 @@ services:
       target: production
     environment:
       NODE_ENV: production
+    env_file: ./verification-token/.env.example
     volumes:
        - ./verification-token:/usr/src/app
 
