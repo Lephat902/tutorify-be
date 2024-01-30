@@ -13,6 +13,8 @@ services:
     env_file: ./api-gateway/.env.example
     volumes:
        - ./api-gateway:/usr/src/app
+       - /usr/src/app/node_modules
+
 
   auth:
     restart: on-failure
@@ -24,6 +26,8 @@ services:
     env_file: ./auth/.env.example
     volumes:
        - ./auth:/usr/src/app
+       - /usr/src/app/node_modules
+
 
   mailer:
     restart: on-failure
@@ -35,6 +39,8 @@ services:
     env_file: ./mailer/.env.example
     volumes:
        - ./mailer:/usr/src/app
+       - /usr/src/app/node_modules
+
 
   verification-token:
     restart: on-failure
@@ -46,6 +52,8 @@ services:
     env_file: ./verification-token/.env.example
     volumes:
        - ./verification-token:/usr/src/app
+       - /usr/src/app/node_modules
+
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
