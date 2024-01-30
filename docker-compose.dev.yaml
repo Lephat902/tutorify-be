@@ -1,16 +1,8 @@
 version: '3'
 
 services:
-  nest-cli:
-    image: node:18-alpine
-    command: npm install -g @nestjs/cli
-    volumes:
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    deploy:
-      replicas: 0
-
   api-gateway:
+    restart: on-failure
     build:
       context: ./api-gateway
       target: development
@@ -21,10 +13,10 @@ services:
       NODE_ENV: development
     volumes:
       - ./api-gateway:/usr/src/app
-    depends_on:
-      - nest-cli
+      - /usr/src/app/node_modules
 
   auth:
+    restart: on-failure
     build:
       context: ./auth
       target: development
@@ -33,10 +25,10 @@ services:
       NODE_ENV: development
     volumes:
       - ./auth:/usr/src/app
-    depends_on:
-      - nest-cli
+      - /usr/src/app/node_modules
 
   mailer:
+    restart: on-failure
     build:
       context: ./mailer
       target: development
@@ -45,22 +37,21 @@ services:
       NODE_ENV: development
     volumes:
       - ./mailer:/usr/src/app
-    depends_on:
-      - nest-cli
+      - /usr/src/app/node_modules
 
   verification-token:
+    restart: on-failure
     build:
       context: ./verification-token
       target: development
-    command: npm run start:dev
     environment:
       NODE_ENV: development
     volumes:
       - ./verification-token:/usr/src/app
-    depends_on:
-      - nest-cli
+      - /usr/src/app/node_modules
 
   rabbitmq:
+    restart: on-failure
     image: rabbitmq:3-management-alpine
     container_name: 'rabbitmq'
     ports:
@@ -71,6 +62,7 @@ services:
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
 
   nginx:
+    restart: on-failure
     build:
       dockerfile: ./nginx/build/Dockerfile
     ports:
