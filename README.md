@@ -11,6 +11,13 @@ Muốn stop một container nhất định thì:
 
 Ở môi trường **production** thì như **development**, chỉ khác là thay thế file compose thành `docker-compose.prod.yaml`
 
+Trong mỗi container, khi mọi người có thay đổi về gói (install, uninstall,...) mà không thấy có sự biến chuyển gì (vẫn báo lỗi,...) thì chạy lệnh sau:
+```bash
+# Giả sử mới thay đổi package ở app 'auth'
+# -V: https://docs.docker.com/engine/reference/commandline/compose_up/#:~:text=%2D%2Drenew%2Danon%2Dvolumes
+docker compose -f docker-compose.dev.yaml up --build -V auth
+```
+
 ## 2. Về Quản lý Repo:
 Chúng ta sử dụng khái niệm submodule của git
 
