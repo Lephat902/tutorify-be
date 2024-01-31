@@ -50,23 +50,9 @@ services:
   rabbitmq:
     restart: on-failure
     image: rabbitmq:3-management-alpine
-    container_name: 'rabbitmq'
     ports:
       - "5672:5672"
       - "15672:15672"
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
-
-  nginx:
-    restart: on-failure
-    build:
-      dockerfile: ./nginx/build/Dockerfile
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx/conf:/etc/nginx/conf.d
-      - .:/usr/src/app
-    working_dir: /usr/src/app
-    depends_on:
-      - api-gateway
