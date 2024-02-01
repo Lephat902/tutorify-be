@@ -2,6 +2,7 @@ version: '3'
 
 services:
   api-gateway:
+    image: tutorify-be-api-gateway:dev
     restart: on-failure
     build:
       context: ./api-gateway
@@ -15,6 +16,7 @@ services:
       - /usr/src/app/node_modules
 
   auth:
+    image: tutorify-be-auth:dev
     restart: on-failure
     build:
       context: ./auth
@@ -26,6 +28,7 @@ services:
       - /usr/src/app/node_modules
 
   mailer:
+    image: tutorify-be-mailer:dev
     restart: on-failure
     build:
       context: ./mailer
@@ -37,6 +40,7 @@ services:
       - /usr/src/app/node_modules
 
   verification-token:
+    image: tutorify-be-api-gateway:dev
     restart: on-failure
     build:
       context: ./verification-token
