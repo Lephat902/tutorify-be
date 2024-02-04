@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api-gateway:
-    image: tutorify-be-api-gateway:prod
+    image: tutorify.azurecr.io/tutorify-be-api-gateway:prod
     restart: on-failure
     ports:
       - "3000:3000"
@@ -18,7 +18,7 @@ services:
 
 
   auth:
-    image: tutorify-be-auth:prod
+    image: tutorify.azurecr.io/tutorify-be-auth:prod
     restart: on-failure
     build:
       context: ./auth
@@ -32,7 +32,7 @@ services:
 
 
   mailer:
-    image: tutorify-be-mailer:prod
+    image: tutorify.azurecr.io/tutorify-be-mailer:prod
     restart: on-failure
     build:
       context: ./mailer
@@ -46,7 +46,7 @@ services:
 
 
   verification-token:
-    image: tutorify-be-verification-token:prod
+    image: tutorify.azurecr.io/tutorify-be-verification-token:prod
     restart: on-failure
     build:
       context: ./verification-token
