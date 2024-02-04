@@ -13,3 +13,6 @@
 [submodule "verification-token"]
 	path = verification-token
 	url = https://github.com/Lephat902/tutorify-be-verification-token.git
+[submodule "feedback"]
+	path = feedback
+	url = https://github.com/HungPham-Canh/tutorify-be-feedback
