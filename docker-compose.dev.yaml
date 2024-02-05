@@ -73,3 +73,14 @@ services:
     volumes:
       - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
       - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
+  feedback:
+    image: tutorify-be-feedback:dev
+    restart: on-failure
+    build:
+      context: ./feedback
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./feedback:/usr/src/app
+      - /usr/src/app/node_modules
