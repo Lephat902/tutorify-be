@@ -59,6 +59,20 @@ services:
        - /usr/src/app/node_modules
 
 
+  feedback:
+    image: tutorify.azurecr.io/tutorify-be-feedback:prod
+    restart: on-failure
+    build:
+      context: ./feedback
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./feedback/.env.example
+    volumes:
+       - ./feedback:/usr/src/app
+       - /usr/src/app/node_modules
+
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
