@@ -40,7 +40,7 @@ services:
       - /usr/src/app/node_modules
 
   verification-token:
-    image: tutorify-be-api-gateway:dev
+    image: tutorify-be-verification-token:dev
     restart: on-failure
     build:
       context: ./verification-token
