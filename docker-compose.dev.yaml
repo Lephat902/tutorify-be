@@ -63,6 +63,19 @@ services:
       - ./feedback:/usr/src/app
       - /usr/src/app/node_modules
 
+  files:
+    image: tutorify-be-files:dev
+    restart: on-failure
+    build:
+      context: ./files
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./files:/usr/src/app
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: on-failure
     image: rabbitmq:3-management-alpine

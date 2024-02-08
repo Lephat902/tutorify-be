@@ -72,6 +72,18 @@ services:
        - ./feedback:/usr/src/app
        - /usr/src/app/node_modules
 
+  files:
+    image: tutorify.azurecr.io/tutorify-be-files:prod
+    restart: on-failure
+    build:
+      context: ./files
+      target: production
+    environment:
+      NODE_ENV: production
+    env_files: ./files/.env
+    volumes:
+       - ./files:/usr/src/app
+       - /usr/src/app/node_modules
 
   rabbitmq:
     image: rabbitmq:3-management-alpine

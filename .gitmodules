@@ -16,3 +16,6 @@
 [submodule "feedback"]
 	path = feedback
 	url = https://github.com/HungPham-Canh/tutorify-be-feedback.git
+[submodule "files"]
+	path = files
+	url = https://github.com/HungPham-Canh/files
