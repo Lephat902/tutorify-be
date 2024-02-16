@@ -12,9 +12,8 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./api-gateway/.env.example
-    volumes:
-       - ./api-gateway:/usr/src/app
-       - /usr/src/app/node_modules
+    depends_on:
+      - rabbitmq
 
 
   auth:
@@ -26,9 +25,6 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./auth/.env.example
-    volumes:
-       - ./auth:/usr/src/app
-       - /usr/src/app/node_modules
 
 
   mailer:
@@ -40,9 +36,6 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./mailer/.env.example
-    volumes:
-       - ./mailer:/usr/src/app
-       - /usr/src/app/node_modules
 
 
   verification-token:
@@ -54,9 +47,6 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./verification-token/.env.example
-    volumes:
-       - ./verification-token:/usr/src/app
-       - /usr/src/app/node_modules
 
 
   feedback:
@@ -68,9 +58,7 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./feedback/.env.example
-    volumes:
-       - ./feedback:/usr/src/app
-       - /usr/src/app/node_modules
+
 
   files:
     image: tutorify.azurecr.io/tutorify-be-files:prod
@@ -80,10 +68,19 @@ services:
       target: production
     environment:
       NODE_ENV: production
-    env_files: ./files/.env
-    volumes:
-       - ./files:/usr/src/app
-       - /usr/src/app/node_modules
+    env_file: ./files/.env
+
+
+  class-and-category:
+    image: tutorify.azurecr.io/tutorify-be-class-and-category:prod
+    restart: on-failure
+    build:
+      context: ./class-and-category
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./class-and-category/.env.example
+
 
   rabbitmq:
     image: rabbitmq:3-management-alpine

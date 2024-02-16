@@ -1,21 +1,37 @@
-## 1. Cách chạy:
-Chạy **development**:
-1. Vào thư mục `tutorify-be`
-2. Gõ `docker compose -f docker-compose.dev.yaml up --build`
 
-Muốn stop tất cả thì: `docker compose -f docker-compose.dev.yaml stop`
+## 1. Cách chạy development:
+Để chạy **development** cho toàn hệ thống:
+1. Vào thư mục `tutorify-be`
+2. Gõ
+ ```bash
+ # Bỏ flag --build đi cho nhẹ nếu không có thay đổi gì về docker-compose hay Dockerfile hoặc các package của service
+ docker compose -f docker-compose.dev.yaml up --build
+ ```
+
+Nếu chỉ muốn chạy cho một số service nhất định thì cung cấp tên của các service đó:
+ ```bash
+ # Giả sử muốn chạy api-gateway và auth
+ docker compose -f docker-compose.dev.yaml up api-gateway auth
+ ```
+
+Muốn stop tất cả thì: 
+ ```bash
+ # Nếu Ctrl + C không được thì dùng cái này
+ docker compose -f docker-compose.dev.yaml stop
+ ```
 
 Muốn stop một container nhất định thì:
-1. Kiếm id của nó qua lệnh `docker ps`
-2. Stop nó bằng `docker stop <id>`
+ ```bash
+ # Kiếm id
+docker ps
+docker stop <id>
+ ```
 
-Ở môi trường **production** thì như **development**, chỉ khác là thay thế file compose thành `docker-compose.prod.yaml`
-
-Trong mỗi container, khi mọi người có thay đổi về gói (install, uninstall,...) mà không thấy có sự biến chuyển gì (vẫn báo lỗi,...) thì chạy lệnh sau:
+Trong mỗi container, khi mọi người có thay đổi về gói (install, uninstall,...) mà không thấy có sự biến chuyển gì (vd, vẫn báo lỗi,...) thì chạy lệnh sau:
 ```bash
 # Giả sử mới thay đổi package ở app 'auth'
 # -V: https://docs.docker.com/engine/reference/commandline/compose_up/#:~:text=%2D%2Drenew%2Danon%2Dvolumes
-docker compose -f docker-compose.dev.yaml up --build -V auth
+docker compose -f docker-compose.dev.yaml up --build -V auth # --flag -V
 ```
 
 ## 2. Về Quản lý Repo:
@@ -64,3 +80,85 @@ git push -u origin main
 git clone --recurse-submodules https://github.com/Lephat902/tutorify-be.git
 ```
 
+## 3. Cách sử dụng thư mục `shared`:
+Hệ thống chúng ta sử dụng thư mục `shared` để chứa một số *dtos* phổ biến và các hàm *helpers* nhằm giúp tăng tính tái sử dụng giữa các microservices.
+Sau đây là các bước cần thiết để việc sử dụng thư mục `shared` trở nên thành công:
+**Với mục đích dev:**
+1. Vào docker-compose.dev, mount thư mục shared vào container:
+```bash
+volumes:
+  - ./class-and-category:/usr/src/app
+  - ./shared:/usr/src/shared  <------ this line
+  - /usr/src/app/node_modules
+```
+2. Vào thư mục của microservice
+
+2.1. `tsconfig.json`
+```json
+// Thêm bên trong thuộc tính compilerOptions
+"compilerOptions": {
+  ...,
+  "paths": {
+    "@tutorify/shared": [
+      "../shared/"
+    ],
+    "@tutorify/shared/*": [
+      "../shared/*"
+    ]
+  }
+}
+```
+2.2. `nest-cli.json`
+```json
+// Do có thư viện shared nên cấu trúc dist đã bị thay đổi
+{
+  "$schema": "https://json.schemastore.org/nest-cli",
+  "collection": "@nestjs/schematics",
+  "sourceRoot": "src",
+  "entryFile": "./app/src/main.js",      <------ this line
+  "compilerOptions": {
+    "deleteOutDir": true
+  }
+}
+```
+**Với mục đích prod:**
+Bên cạnh các bước kể trên dev, còn những lưu ý quan trọng như sau:
+1. Thay đổi Dockerfile: 
+```dockerfile
+... # other code
+COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+
+# Copy temp 'shared' dir
+COPY --chown=node:node ./shared /usr/src/shared # <---- this line 
+  
+COPY --chown=node:node . .
+... # other code
+```
+Ngoài ra còn phải đổi câu lệnh run production:
+```dockerfile
+# Start the server using the production build
+CMD [ "node", "dist/app/src/main.js" ]
+```
+
+2. Câu lệnh dùng khi build hiện tại sẽ là:
+```bash
+# build toàn bộ
+./prod-build.sh
+# build một vài image, vd, api-gateway, auth
+./prod-build.sh api-gateway auth 
+```
+
+Sau đó có thể run production như bình thường:
+```bash
+ docker compose -f docker-compose.prod.yaml up
+```
+
+## 4. Phụ lục:
+1. Build production để làm gì?
+Production do đã được lược bỏ nhiều packages chỉ dùng cho dev phase (devDependencies) nên sẽ nhẹ hơn nhiều so với dev
+```bash
+phatle@localhost:~/$ docker images
+REPOSITORY                                           TAG                   IMAGE ID       CREATED        SIZE
+tutorify.azurecr.io/tutorify-be-api-gateway          prod                  226ab062bd90   6 hours ago    178MB
+tutorify-be-api-gateway                              dev                   ddd1b46e5566   8 hours ago    416MB
+```
