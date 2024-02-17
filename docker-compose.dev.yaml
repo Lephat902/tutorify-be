@@ -3,7 +3,7 @@ version: '3'
 services:
   api-gateway:
     image: tutorify-be-api-gateway:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./api-gateway
       target: development
@@ -19,7 +19,7 @@ services:
 
   auth:
     image: tutorify-be-auth:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./auth
       target: development
@@ -31,7 +31,7 @@ services:
 
   mailer:
     image: tutorify-be-mailer:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./mailer
       target: development
@@ -43,7 +43,7 @@ services:
 
   verification-token:
     image: tutorify-be-verification-token:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./verification-token
       target: development
@@ -55,7 +55,7 @@ services:
 
   feedback:
     image: tutorify-be-feedback:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./feedback
       target: development
@@ -67,7 +67,7 @@ services:
 
   files:
     image: tutorify-be-files:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./files
       target: development
@@ -79,7 +79,7 @@ services:
 
   class-and-category:
     image: tutorify-be-class-and-category:dev
-    restart: on-failure
+    restart: no
     build:
       context: ./class-and-category
       target: development
@@ -92,7 +92,7 @@ services:
 
 
   rabbitmq:
-    restart: on-failure
+    restart: no
     image: rabbitmq:3-management-alpine
     ports:
       - "5672:5672"
