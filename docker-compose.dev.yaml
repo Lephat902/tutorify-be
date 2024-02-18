@@ -17,6 +17,7 @@ services:
     depends_on:
       - rabbitmq
 
+
   auth:
     image: tutorify-be-auth:dev
     restart: no
@@ -28,6 +29,7 @@ services:
     volumes:
       - ./auth:/usr/src/app
       - /usr/src/app/node_modules
+
 
   mailer:
     image: tutorify-be-mailer:dev
@@ -41,6 +43,7 @@ services:
       - ./mailer:/usr/src/app
       - /usr/src/app/node_modules
 
+
   verification-token:
     image: tutorify-be-verification-token:dev
     restart: no
@@ -52,6 +55,7 @@ services:
     volumes:
       - ./verification-token:/usr/src/app
       - /usr/src/app/node_modules
+
 
   feedback:
     image: tutorify-be-feedback:dev
@@ -65,6 +69,7 @@ services:
       - ./feedback:/usr/src/app
       - /usr/src/app/node_modules
 
+
   files:
     image: tutorify-be-files:dev
     restart: no
@@ -76,6 +81,7 @@ services:
     volumes:
       - ./files:/usr/src/app
       - /usr/src/app/node_modules
+
 
   class-and-category:
     image: tutorify-be-class-and-category:dev
