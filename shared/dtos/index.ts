@@ -1,2 +1,3 @@
 export * from './pagination.dto';
 export * from './sort-dir.dto';
+export * from './tutor-apply-for-class';
