@@ -82,6 +82,17 @@ services:
     env_file: ./class-and-category/.env.example
 
 
+  tutor-apply-for-class:
+    image: tutorify.azurecr.io/tutorify-be-tutor-apply-for-class:prod
+    restart: on-failure
+    build:
+      context: ./tutor-apply-for-class
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./tutor-apply-for-class/.env.example
+
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:

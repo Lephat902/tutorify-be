@@ -98,6 +98,20 @@ services:
       - /usr/src/app/node_modules
 
 
+  tutor-apply-for-class:
+    image: tutorify-be-tutor-apply-for-class:dev
+    restart: no
+    build:
+      context: ./tutor-apply-for-class
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./tutor-apply-for-class:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine
