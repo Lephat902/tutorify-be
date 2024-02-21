@@ -1,4 +1,5 @@
 
+
 ## 1. Cách chạy development:
 Để chạy **development** cho toàn hệ thống:
 1. Vào thư mục `tutorify-be`
@@ -100,10 +101,10 @@ volumes:
   ...,
   "paths": {
     "@tutorify/shared": [
-      "../shared/"
+      "../shared/src"
     ],
     "@tutorify/shared/*": [
-      "../shared/*"
+      "../shared/src/*"
     ]
   }
 }
@@ -125,14 +126,31 @@ volumes:
 Bên cạnh các bước kể trên dev, còn những lưu ý quan trọng như sau:
 1. Thay đổi Dockerfile: 
 ```dockerfile
-... # other code
+... # OTHER CODES
 COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
 
 # Copy temp 'shared' dir
 COPY --chown=node:node ./shared /usr/src/shared # <---- this line 
   
 COPY --chown=node:node . .
-... # other code
+
+... # OTHER CODES
+
+# the 'npm ci' cmd requires root access
+USER root
+
+# Switch to shared dir
+WORKDIR /usr/src/shared # <---- this line 
+
+# Install packages
+RUN npm ci --only=production && npm cache clean --force # <---- this line 
+
+# Switch back to app dir
+WORKDIR /usr/src/app # <---- this line 
+
+# Run the build command which creates the production bundle
+RUN npm run build
+... # OTHER CODES
 ```
 Ngoài ra còn phải đổi câu lệnh run production:
 ```dockerfile

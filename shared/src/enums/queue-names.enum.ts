@@ -1,0 +1,9 @@
+// Microservice name -> Queue name
+export enum QueueNames {
+    AUTH = 'auth',
+    CLASS_AND_CATEGORY = 'class-and-category',
+    MAILER = 'mail',
+    VERIFICATION_TOKEN = 'verification-token',
+    FEEDBACK = 'feedback',
+    TUTOR_APPLY_FOR_CLASS = 'tutor-apply-for-class'
+}
