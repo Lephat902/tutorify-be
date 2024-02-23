@@ -5,5 +5,6 @@ export enum QueueNames {
     MAILER = 'mail',
     VERIFICATION_TOKEN = 'verification-token',
     FEEDBACK = 'feedback',
-    TUTOR_APPLY_FOR_CLASS = 'tutor-apply-for-class'
+    TUTOR_APPLY_FOR_CLASS = 'tutor-apply-for-class',
+    STUDENT_FAVORITE_TUTOR = 'student-favorite-tutor',
 }

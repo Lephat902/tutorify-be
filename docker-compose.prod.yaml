@@ -93,6 +93,17 @@ services:
     env_file: ./tutor-apply-for-class/.env.example
 
 
+  student-favorite-tutor:
+    image: tutorify.azurecr.io/tutorify-be-student-favorite-tutor:prod
+    restart: on-failure
+    build:
+      context: ./student-favorite-tutor
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./student-favorite-tutor/.env.example
+
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:

@@ -113,6 +113,20 @@ services:
       - /usr/src/app/node_modules
 
 
+  student-favorite-tutor:
+    image: tutorify-be-student-favorite-tutor:dev
+    restart: no
+    build:
+      context: ./student-favorite-tutor
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./student-favorite-tutor:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine
