@@ -127,6 +127,20 @@ services:
       - /usr/src/app/node_modules
 
 
+  tutor-proficient-in-class-category:
+    image: tutorify-be-tutor-proficient-in-class-category:dev
+    restart: no
+    build:
+      context: ./tutor-proficient-in-class-category
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./tutor-proficient-in-class-category:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine
