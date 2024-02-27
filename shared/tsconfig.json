@@ -1,13 +1,8 @@
 {
   "compilerOptions": {
     "experimentalDecorators": true,
-    "target": "es2017",
+    "target": "ES2021",
     "module": "commonjs",
-    "lib": [
-      "es2017",
-      "es7",
-      "es6"
-    ],
     "declaration": true,
     "declarationMap": true,
     "sourceMap": true,
@@ -21,7 +16,9 @@
     "emitDecoratorMetadata": true
   },
   "exclude": [
+    "test-fixtures",
     "node_modules",
-    "dist"
+    "test",
+    "dist",
   ]
 }
