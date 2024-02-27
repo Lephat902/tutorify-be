@@ -1,7 +1,5 @@
-enum SortingDirectionEnum {
-    ASC = 'ASC',
-    DESC = 'DESC',
-}
+import { SortingDirection } from "..";
+
 export class SortingDirectionDto {
-    readonly dir?: SortingDirectionEnum = SortingDirectionEnum.ASC;
+    readonly dir?: SortingDirection = SortingDirection.ASC;
 }
