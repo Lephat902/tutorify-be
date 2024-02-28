@@ -5,6 +5,8 @@ export class ClassCategoryCreatedEventPattern {
 export class ClassCategoryCreatedEventPayload {
     constructor(
         readonly classCategoryId: string,
+        readonly levelId: string,
+        readonly subjectId: string,
     ) { }
 }
 

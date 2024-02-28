@@ -142,6 +142,20 @@ services:
       - /usr/src/app/node_modules
 
 
+  tutor-query:
+    image: tutorify-be-tutor-query:dev
+    restart: no
+    build:
+      context: ./tutor-query
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./tutor-query:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine
