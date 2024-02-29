@@ -3,5 +3,6 @@ export enum ApplicationStatus {
     REJECTED = 'REJECTED',
     CANCELLED = 'CANCELLED',
     FILLED = 'FILLED',
+    CLASS_DELETED = 'CLASS_DELETED',
     PENDING = 'PENDING',
 }
