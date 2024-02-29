@@ -12,6 +12,8 @@ export class UserCreatedEventPayload {
         readonly firstName: string,
         readonly lastName: string,
         readonly role: UserRole,
+        // Tutor-specifc data
+        readonly proficienciesIds?: string[],
     ) { }
 }
 
