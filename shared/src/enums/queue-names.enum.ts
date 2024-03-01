@@ -9,4 +9,5 @@ export enum QueueNames {
     STUDENT_FAVORITE_TUTOR = 'student-favorite-tutor',
     TUTOR_PROFICIENT_IN_CLASS_CATEGORY = 'tutor-proficient-in-class-category',
     TUTOR_QUERY = 'tutor-query',
+    FILE = 'file',
 }
