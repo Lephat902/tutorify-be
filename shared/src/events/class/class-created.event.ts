@@ -5,6 +5,7 @@ export class ClassCreatedEventPattern {
 export class ClassCreatedEventPayload {
     constructor(
         readonly classId: string,
+        readonly desiredTutorIds: string[],
     ) { }
 }
 
