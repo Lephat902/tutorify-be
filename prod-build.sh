@@ -2,7 +2,16 @@
 
 # Please notice that services list just used for cp and rm command, not docker compose
 # Services in this list will have access to 'shared' dir during build process
-microservices_use_shared_dir=("class-and-category" "api-gateway" "tutor-apply-for-class" "tutor-proficient-in-class-category" "auth" "student-favorite-tutor" "feedback")
+microservices_use_shared_dir=(
+    "class-and-category"
+    "api-gateway"
+    "tutor-apply-for-class"
+    "tutor-proficient-in-class-category"
+    "auth"
+    "student-favorite-tutor"
+    "feedback"
+    "tutor-query"
+)
 
 # Iterate through the input arguments and check if they are in microservices_use_shared_dir
 for arg in "$@"; do
