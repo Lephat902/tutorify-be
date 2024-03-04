@@ -34,3 +34,6 @@
 [submodule "tutor-query"]
 	path = tutor-query
 	url = https://github.com/Lephat902/tutorify-be-tutor-query
+[submodule "address"]
+	path = address
+	url = https://github.com/HungPham-Canh/tutorify-be-address.git
