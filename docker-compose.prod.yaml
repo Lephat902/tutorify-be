@@ -2,7 +2,7 @@ version: '3'
 
 services:
   api-gateway:
-    image: tutorify.azurecr.io/tutorify-be-api-gateway:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-api-gateway:prod
     restart: on-failure
     ports:
       - "3000:3000"
@@ -17,7 +17,7 @@ services:
 
 
   auth:
-    image: tutorify.azurecr.io/tutorify-be-auth:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-auth:prod
     restart: on-failure
     build:
       context: ./auth
@@ -28,7 +28,7 @@ services:
 
 
   mailer:
-    image: tutorify.azurecr.io/tutorify-be-mailer:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-mailer:prod
     restart: on-failure
     build:
       context: ./mailer
@@ -39,7 +39,7 @@ services:
 
 
   verification-token:
-    image: tutorify.azurecr.io/tutorify-be-verification-token:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-verification-token:prod
     restart: on-failure
     build:
       context: ./verification-token
@@ -50,7 +50,7 @@ services:
 
 
   feedback:
-    image: tutorify.azurecr.io/tutorify-be-feedback:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-feedback:prod
     restart: on-failure
     build:
       context: ./feedback
@@ -61,7 +61,7 @@ services:
 
 
   files:
-    image: tutorify.azurecr.io/tutorify-be-files:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-files:prod
     restart: on-failure
     build:
       context: ./files
@@ -72,7 +72,7 @@ services:
 
 
   class-and-category:
-    image: tutorify.azurecr.io/tutorify-be-class-and-category:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-class-and-category:prod
     restart: on-failure
     build:
       context: ./class-and-category
@@ -83,7 +83,7 @@ services:
 
 
   tutor-apply-for-class:
-    image: tutorify.azurecr.io/tutorify-be-tutor-apply-for-class:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-apply-for-class:prod
     restart: on-failure
     build:
       context: ./tutor-apply-for-class
@@ -94,7 +94,7 @@ services:
 
 
   student-favorite-tutor:
-    image: tutorify.azurecr.io/tutorify-be-student-favorite-tutor:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-student-favorite-tutor:prod
     restart: on-failure
     build:
       context: ./student-favorite-tutor
@@ -105,7 +105,7 @@ services:
 
 
   tutor-proficient-in-class-category:
-    image: tutorify.azurecr.io/tutorify-be-tutor-proficient-in-class-category:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-proficient-in-class-category:prod
     restart: on-failure
     build:
       context: ./tutor-proficient-in-class-category
@@ -116,7 +116,7 @@ services:
 
 
   tutor-query:
-    image: tutorify.azurecr.io/tutorify-be-tutor-query:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-query:prod
     restart: on-failure
     build:
       context: ./tutor-query
@@ -124,6 +124,17 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./tutor-query/.env.example
+
+
+  class-session:
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-class-session:prod
+    restart: on-failure
+    build:
+      context: ./class-session
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./class-session/.env.example
 
 
   rabbitmq:
