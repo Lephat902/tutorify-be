@@ -155,6 +155,18 @@ services:
       - ./shared:/usr/src/shared
       - /usr/src/app/node_modules
 
+  address:
+    image: tutorify-be-address:dev
+    restart: no
+    build:
+      context: ./address
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./address:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
 
   rabbitmq:
     restart: no

@@ -125,6 +125,15 @@ services:
       NODE_ENV: production
     env_file: ./tutor-query/.env.example
 
+  address:
+    image: tutorify.azurecr.io/tutorify-be-address:prod
+    restart: on-failure
+    build:
+      context: ./address
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./address/.env.example
 
   class-session:
     image: registry.digitalocean.com/tutorify-registry/tutorify-be-class-session:prod
