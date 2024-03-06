@@ -126,7 +126,7 @@ services:
     env_file: ./tutor-query/.env.example
 
   address:
-    image: tutorify.azurecr.io/tutorify-be-address:prod
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-address:prod
     restart: on-failure
     build:
       context: ./address
