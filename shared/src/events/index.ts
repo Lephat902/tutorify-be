@@ -5,3 +5,4 @@ export * from './class-application';
 export * from './tutor-proficiency';
 export * from './favorite-tutor';
 export * from './feedback';
+export * from './class-session';

@@ -168,6 +168,20 @@ services:
       - ./shared:/usr/src/shared
       - /usr/src/app/node_modules
 
+  class-session:
+    image: tutorify-be-class-session:dev
+    restart: no
+    build:
+      context: ./class-session
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./class-session:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine
