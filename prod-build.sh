@@ -12,6 +12,7 @@ microservices_use_shared_dir=(
     "feedback"
     "tutor-query"
     "class-session"
+    "address"
 )
 
 # Iterate through the input arguments and check if they are in microservices_use_shared_dir
