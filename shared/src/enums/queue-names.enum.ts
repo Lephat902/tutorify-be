@@ -11,5 +11,6 @@ export enum QueueNames {
   TUTOR_QUERY = "tutor-query",
   FILE = "file",
   ADDRESS = "address",
-  CLASS_SESSION = 'class-session',
+  CLASS_SESSION = "class-session",
+  REPORT = "report",
 }

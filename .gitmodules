@@ -40,3 +40,6 @@
 [submodule "class-session"]
 	path = class-session
 	url = https://github.com/Lephat902/tutorify-be-class-session.git
+[submodule "report"]
+	path = report
+	url = https://github.com/HungPham-Canh/tutorify-be-report.git
