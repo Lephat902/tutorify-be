@@ -181,6 +181,18 @@ services:
       - ./shared:/usr/src/shared
       - /usr/src/app/node_modules
 
+  report:
+    image: tutorify-be-report:dev
+    restart: no
+    build:
+      context: ./report
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./report:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
 
   rabbitmq:
     restart: no

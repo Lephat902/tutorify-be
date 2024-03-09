@@ -145,6 +145,15 @@ services:
       NODE_ENV: production
     env_file: ./class-session/.env.example
 
+  report:
+    image: registry.digitalocean.com/tutorify-registry/tutorify-be-report:prod
+    restart: on-failure
+    build:
+      context: ./report
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./report/.env.example
 
   rabbitmq:
     image: rabbitmq:3-management-alpine
