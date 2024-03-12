@@ -1,5 +1,17 @@
 #!/bin/bash
 
+# Function to push Docker image to registry
+push_docker_image() {
+    local service_name=$1
+    docker push "registry.digitalocean.com/tutorify-registry/tutorify-be-${service_name}:prod"
+}
+
+# Function to restart Kubernetes deployment
+restart_kubernetes_deployment() {
+    local service_name=$1
+    kubectl rollout restart -f "./k8s/services/${service_name}.yaml"
+}
+
 # Please notice that services list just used for cp and rm command, not docker compose
 # Services in this list will have access to 'shared' dir during build process
 microservices_use_shared_dir=(
@@ -13,6 +25,7 @@ microservices_use_shared_dir=(
     "tutor-query"
     "class-session"
     "address"
+    "report"
 )
 
 # Iterate through the input arguments and check if they are in microservices_use_shared_dir
@@ -35,3 +48,12 @@ for arg in "$@"; do
         rm -r "./$arg/shared"
     fi
 done
+
+# Iterate through the input arguments and push Docker images and restart Kubernetes deployments
+for service_name in "$@"; do
+    # Run push_docker_image in background
+    (push_docker_image "$service_name" && restart_kubernetes_deployment "$service_name") &
+done
+
+# Wait for all background processes to finish
+wait
