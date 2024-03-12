@@ -5,3 +5,4 @@ export * from './tutor-approved.event';
 export * from './user-blocked.event';
 export * from './user-unblocked.event';
 export * from './enums';
+export * from './user-updated.event';
