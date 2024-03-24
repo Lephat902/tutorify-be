@@ -43,3 +43,6 @@
 [submodule "report"]
 	path = report
 	url = https://github.com/HungPham-Canh/tutorify-be-report.git
+[submodule "user-preferences"]
+	path = user-preferences
+	url = https://github.com/Lephat902/tutorify-be-user-preferences
