@@ -1,7 +1,7 @@
 import { QueueNames } from "../../enums";
 
 export class TutorProficiencyDeletedEventPattern {
-    readonly pattern: string = `${QueueNames.TUTOR_PROFICIENT_IN_CLASS_CATEGORY}.tutor-proficiency-deleted`;
+    readonly pattern: string = `${QueueNames.USER_PREFERENCES}.tutor-proficiency-deleted`;
 }
 
 export class TutorProficiencyDeletedEventPayload {

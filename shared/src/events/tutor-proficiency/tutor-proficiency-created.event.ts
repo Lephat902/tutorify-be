@@ -1,7 +1,7 @@
 import { QueueNames } from "../../enums";
 
 export class TutorProficiencyCreatedEventPattern {
-    readonly pattern: string = `${QueueNames.TUTOR_PROFICIENT_IN_CLASS_CATEGORY}.tutor-proficiency-created`;
+    readonly pattern: string = `${QueueNames.USER_PREFERENCES}.tutor-proficiency-created`;
 }
 
 export class TutorProficiencyCreatedEventPayload {
