@@ -13,4 +13,5 @@ export enum QueueNames {
   ADDRESS = "address",
   CLASS_SESSION = "class-session",
   REPORT = "report",
+  USER_PREFERENCES = 'user-preferences',
 }

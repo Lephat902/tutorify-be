@@ -192,6 +192,19 @@ services:
       - ./shared:/usr/src/shared
       - /usr/src/app/node_modules
 
+  user-preferences:
+    image: tutorify-be-user-preferences:dev
+    restart: no
+    build:
+      context: ./user-preferences
+      target: development
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./user-preferences:/usr/src/app
+      - ./shared:/usr/src/shared
+      - /usr/src/app/node_modules
+
   rabbitmq:
     restart: no
     image: rabbitmq:3-management-alpine

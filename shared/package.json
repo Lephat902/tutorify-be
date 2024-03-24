@@ -4,15 +4,16 @@
   "description": "",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-  },
+  "scripts": {},
   "author": "",
   "license": "ISC",
   "dependencies": {
     "@nestjs/common": "^10.3.3",
-    "@nestjs/microservices": "^10.3.3"
+    "@nestjs/microservices": "^10.3.3",
+    "geojson": "^0.5.0"
   },
   "devDependencies": {
+    "@types/geojson": "^7946.0.14",
     "@types/node": "^20.11.24",
     "amqp-connection-manager": "^4.1.14",
     "amqplib": "^0.10.3",

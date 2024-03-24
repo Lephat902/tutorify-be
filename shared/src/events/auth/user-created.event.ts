@@ -12,8 +12,10 @@ export class UserCreatedEventPayload {
         readonly firstName: string,
         readonly lastName: string,
         readonly role: UserRole,
-        // Tutor-specifc data
+        // Tutor-specific data
         readonly proficienciesIds?: string[],
+        // Student-specific data
+        readonly interestedClassCategoryIds?: string[],
     ) { }
 }
 
@@ -22,7 +24,7 @@ export class UserCreatedEvent {
 
     constructor(
         readonly payload: UserCreatedEventPayload,
-    ) { 
+    ) {
         this.pattern = new UserCreatedEventPattern();
     }
 }
