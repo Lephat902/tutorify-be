@@ -28,9 +28,6 @@
 [submodule "student-favorite-tutor"]
 	path = student-favorite-tutor
 	url = https://github.com/Lephat902/tutorify-be-student-favorite-tutor
-[submodule "tutor-proficient-in-class-category"]
-	path = tutor-proficient-in-class-category
-	url = https://github.com/Lephat902/tutorify-be-tutor-proficiencies
 [submodule "tutor-query"]
 	path = tutor-query
 	url = https://github.com/Lephat902/tutorify-be-tutor-query

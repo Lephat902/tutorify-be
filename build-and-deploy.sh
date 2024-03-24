@@ -18,7 +18,6 @@ microservices_use_shared_dir=(
     "class-and-category"
     "api-gateway"
     "tutor-apply-for-class"
-    "tutor-proficient-in-class-category"
     "auth"
     "student-favorite-tutor"
     "feedback"

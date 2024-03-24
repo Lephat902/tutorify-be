@@ -102,17 +102,6 @@ services:
     env_file: ./student-favorite-tutor/.env.example
 
 
-  tutor-proficient-in-class-category:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-proficient-in-class-category:prod
-    restart: on-failure
-    build:
-      context: ./tutor-proficient-in-class-category
-      target: production
-    environment:
-      NODE_ENV: production
-    env_file: ./tutor-proficient-in-class-category/.env.example
-
-
   tutor-query:
     image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-query:prod
     restart: on-failure
