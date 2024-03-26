@@ -4,9 +4,6 @@
 [submodule "auth"]
 	path = auth
 	url = https://github.com/Lephat902/tutorify-be-auth
-[submodule "nginx"]
-	path = nginx
-	url = https://github.com/Lephat902/tutorify-be-nginx.git
 [submodule "mailer"]
 	path = mailer
 	url = https://github.com/Lephat902/tutorify-be-mailer.git
