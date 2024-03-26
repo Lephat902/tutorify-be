@@ -12,7 +12,6 @@ services:
     volumes:
       - ./api-gateway:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
     depends_on:
       - rabbitmq
 
@@ -28,8 +27,6 @@ services:
     volumes:
       - ./auth:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
-
 
   mailer:
     image: tutorify-be-mailer:dev
@@ -41,7 +38,6 @@ services:
       NODE_ENV: development
     volumes:
       - ./mailer:/usr/src/app
-      - /usr/src/app/node_modules
 
 
   verification-token:
@@ -54,7 +50,6 @@ services:
       NODE_ENV: development
     volumes:
       - ./verification-token:/usr/src/app
-      - /usr/src/app/node_modules
 
 
   feedback:
@@ -68,7 +63,6 @@ services:
     volumes:
       - ./feedback:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
 
 
   files:
@@ -81,7 +75,6 @@ services:
       NODE_ENV: development
     volumes:
       - ./files:/usr/src/app
-      - /usr/src/app/node_modules
 
 
   class-and-category:
@@ -95,7 +88,6 @@ services:
     volumes:
       - ./class-and-category:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
 
 
   tutor-apply-for-class:
@@ -109,7 +101,6 @@ services:
     volumes:
       - ./tutor-apply-for-class:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
 
 
   student-favorite-tutor:
@@ -123,7 +114,6 @@ services:
     volumes:
       - ./student-favorite-tutor:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
 
 
   tutor-query:
@@ -137,7 +127,7 @@ services:
     volumes:
       - ./tutor-query:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
+
 
   address:
     image: tutorify-be-address:dev
@@ -150,7 +140,7 @@ services:
     volumes:
       - ./address:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
+
 
   class-session:
     image: tutorify-be-class-session:dev
@@ -163,7 +153,7 @@ services:
     volumes:
       - ./class-session:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
+
 
   report:
     image: tutorify-be-report:dev
@@ -176,7 +166,7 @@ services:
     volumes:
       - ./report:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
+
 
   user-preferences:
     image: tutorify-be-user-preferences:dev
@@ -189,7 +179,7 @@ services:
     volumes:
       - ./user-preferences:/usr/src/app
       - ./shared:/usr/src/shared
-      - /usr/src/app/node_modules
+
 
   rabbitmq:
     restart: no
