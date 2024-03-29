@@ -5,3 +5,4 @@ export * from "./tutor-apply-for-class";
 export * from "./location.dto";
 export * from "./class-category";
 export * from "./feedback-sorting.dto";
+export * from "./user-make-request.dto";
