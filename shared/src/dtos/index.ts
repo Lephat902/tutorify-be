@@ -6,3 +6,4 @@ export * from "./location.dto";
 export * from "./class-category";
 export * from "./feedback-sorting.dto";
 export * from "./user-make-request.dto";
+export * from "./geocode-response.dto";
