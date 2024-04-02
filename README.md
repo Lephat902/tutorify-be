@@ -127,7 +127,7 @@ Bên cạnh các bước kể trên dev, còn những lưu ý quan trọng như 
 1. Thay đổi Dockerfile: 
 ```dockerfile
 ... # OTHER CODES
-COPY --chown=node:node --from=development /usr/src/app/node_modules ./node_modules
+COPY --chown=node:node package*.json ./
 
 # Copy temp 'shared' dir
 COPY --chown=node:node ./shared /usr/src/shared # <---- this line 
@@ -143,7 +143,7 @@ USER root
 WORKDIR /usr/src/shared # <---- this line 
 
 # Install packages
-RUN npm ci --only=production && npm cache clean --force # <---- this line 
+RUN npm ci --only=production # <---- this line 
 
 # Switch back to app dir
 WORKDIR /usr/src/app # <---- this line 
