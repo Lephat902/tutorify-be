@@ -1,3 +1,4 @@
+import { StoredLocation } from "../../dtos";
 import { UserRole } from "../../enums";
 
 export class UserCreatedEventPattern {
@@ -12,6 +13,7 @@ export class UserCreatedEventPayload {
         readonly firstName: string,
         readonly lastName: string,
         readonly role: UserRole,
+        readonly location: StoredLocation,
         // Tutor-specific data
         readonly proficienciesIds?: string[],
         // Student-specific data
