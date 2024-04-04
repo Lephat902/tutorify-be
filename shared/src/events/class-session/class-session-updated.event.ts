@@ -10,8 +10,6 @@ export class ClassSessionUpdatedEventPayload {
 	readonly classId: string,
         readonly classSessionId: string,
         readonly updatedAt: Date,
-        readonly address: string,
-        readonly wardId: string,
     ) { }
 }
 
