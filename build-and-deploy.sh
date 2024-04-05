@@ -26,6 +26,7 @@ microservices_use_shared_dir=(
     "address"
     "report"
     "user-preferences"
+    "mailer"
 )
 
 # Iterate through the input arguments and check if they are in microservices_use_shared_dir
