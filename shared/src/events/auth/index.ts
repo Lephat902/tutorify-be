@@ -6,3 +6,5 @@ export * from './user-blocked.event';
 export * from './user-unblocked.event';
 export * from './enums';
 export * from './user-updated.event';
+export * from './tutor-rejected.event';
+export * from './user-deleted.event';
