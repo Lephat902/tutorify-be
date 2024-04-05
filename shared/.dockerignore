@@ -6,7 +6,8 @@ Dockerfile
 
 # Build dependencies
 dist.do
-**/node_modules/
+# For shared dir, to optimize build time, we allow node_modules to be copied
+# **/node_modules/
 dist
 
 # Misc
