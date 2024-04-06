@@ -7,9 +7,11 @@ import { VerificationTokenProxy } from './proxies/verification-token.proxy';
 import { ClientsModule, Transport } from '@nestjs/microservices';
 import { QueueNames } from '../../enums';
 import { ConfigService } from '@nestjs/config';
+import { AuthProxy } from './proxies/auth.proxy';
 
 const Proxies = [
     AddressProxy,
+    AuthProxy,
     FileProxy,
     MailerProxy,
     UserPreferencesProxy,
