@@ -1,4 +1,4 @@
 export interface GeocodeResponseDto {
-  lon: string;
-  lat: string;
+  lon: number;
+  lat: number;
 }
