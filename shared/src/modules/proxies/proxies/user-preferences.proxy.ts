@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
-import { QueueNames, StoredLocation } from "..";
+import { QueueNames, StoredLocation } from "../../..";
 import { firstValueFrom, timeout } from "rxjs";
 
 type UserPreferencesData = {

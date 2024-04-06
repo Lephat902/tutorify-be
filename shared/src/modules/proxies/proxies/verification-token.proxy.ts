@@ -1,6 +1,6 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { ClientProxy } from "@nestjs/microservices";
-import { QueueNames } from "..";
+import { QueueNames } from "../../..";
 import { firstValueFrom } from "rxjs";
 
 @Injectable()
