@@ -1,6 +1,10 @@
 import { ClientProxy } from "@nestjs/microservices";
 import { catchError, firstValueFrom, of, timeout } from "rxjs";
 
+function identity(x: any) {
+    return x;
+}
+
 export abstract class BaseProxy {
     protected client: ClientProxy;
 
@@ -10,15 +14,12 @@ export abstract class BaseProxy {
 
     protected sendRequest<T>(cmd: string, data: any, timeoutDuration?: number): Promise<T> {
         const request = this.client.send<T>({ cmd }, data);
-        if (timeoutDuration) {
-            request.pipe(timeout(timeoutDuration));
-        }
-        return firstValueFrom(request
-            .pipe(
-                catchError(error => {
-                    console.error('Error occurred:', error);
-                    return of(null);
-                })
-            ));
-    }
+        return firstValueFrom(request.pipe(
+            timeoutDuration ? timeout(timeoutDuration) : identity,
+            catchError(error => {
+                console.error('Error occurred:', error);
+                return of(null);
+            })
+        ));
+    }    
 }
