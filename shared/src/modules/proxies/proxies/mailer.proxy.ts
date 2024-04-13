@@ -22,4 +22,13 @@ export class MailerProxy {
             })
         );
     }
+
+    async sendNewPassword(user: User, newPassword: string) {
+        await firstValueFrom(
+            this.client.send<string>({ cmd: 'sendNewPassword' }, {
+                user: { name: user.firstName, email: user.email },
+                newPassword,
+            })
+        );
+    }
 }
