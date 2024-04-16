@@ -1,3 +1,5 @@
+import { UserRole } from "../../enums";
+
 export class UserDeletedEventPattern {
     readonly pattern: string = 'auth.user-deleted';
 }
@@ -5,6 +7,7 @@ export class UserDeletedEventPattern {
 export class UserDeletedEventPayload {
     constructor(
         readonly userId: string,
+        readonly role: UserRole,
     ) { }
 }
 
