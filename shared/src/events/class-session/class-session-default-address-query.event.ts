@@ -1,4 +1,3 @@
-import { LocationDto } from "../../dtos";
 import { QueueNames } from "../../enums";
 
 export class ClassSessionDefaultAddressQueryEventPattern {

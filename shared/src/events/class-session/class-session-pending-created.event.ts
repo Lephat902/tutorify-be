@@ -1,10 +1,10 @@
 import { QueueNames } from "../../enums";
 
-export class ClassSessionCreatedEventPattern {
+export class ClassSessionPendingCreatedEventPattern {
     readonly pattern: string = `${QueueNames.CLASS_SESSION}.class-session-created`;
 }
 
-export class ClassSessionCreatedEventPayload {
+export class ClassSessionPendingCreatedEventPayload {
     constructor(
         readonly createSessionTutorId: string,
         readonly classSessionId: string,
@@ -14,12 +14,12 @@ export class ClassSessionCreatedEventPayload {
     ) { }
 }
 
-export class ClassSessionCreatedEvent {
-    readonly pattern: ClassSessionCreatedEventPattern;
+export class ClassSessionPendingCreatedEvent {
+    readonly pattern: ClassSessionPendingCreatedEventPattern;
 
     constructor(
-        readonly payload: ClassSessionCreatedEventPayload,
+        readonly payload: ClassSessionPendingCreatedEventPayload,
     ) { 
-        this.pattern = new ClassSessionCreatedEventPattern();
+        this.pattern = new ClassSessionPendingCreatedEventPattern();
     }
 }
