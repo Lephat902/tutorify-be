@@ -4,21 +4,22 @@ import { QueueNames } from "../..";
 
 @Injectable()
 export class BroadcastService {
-  private readonly microservice_clients: { [key: string]: ClientProxy } = {};
+  private readonly microservice_clients: Map<QueueNames, ClientProxy> = new Map();
 
   constructor() {
-    for (const microservice in QueueNames) {
+    for (const queueNameKey in QueueNames) {
+      const currentQueueNameVal = QueueNames[queueNameKey];
       const client: ClientProxy = ClientProxyFactory.create({
         transport: Transport.RMQ,
         options: {
           urls: [process.env.RABBITMQ_URI],
-          queue: QueueNames[microservice as keyof typeof QueueNames],
+          queue: currentQueueNameVal,
           queueOptions: {
             durable: false
           }
         }
       });
-      this.microservice_clients[microservice] = client;
+      this.microservice_clients[currentQueueNameVal] = client;
     }
   }
 
@@ -28,14 +29,13 @@ export class BroadcastService {
     excluding?: QueueNames[]
   ) {
     console.log(`broadcasting event...`, { event, data, excluding });
-    for (const microservice in QueueNames) {
-      console.log(microservice);
-      const currentQueueNameVal = QueueNames[microservice as keyof typeof QueueNames]
+    for (const queueNameKey in QueueNames) {
+      const currentQueueNameVal = QueueNames[queueNameKey];
       const ignoreMicroservice = excluding?.includes(currentQueueNameVal);
       if (ignoreMicroservice) {
         continue;
       }
-      const client = this.microservice_clients[microservice];
+      const client = this.microservice_clients[currentQueueNameVal];
       client.emit(event, data || {});
     }
   }
