@@ -15,9 +15,9 @@ export class UserUpdatedEventPayload {
         readonly role: UserRole,
         readonly location: StoredLocation,
         // Tutor-specific data
-        readonly proficienciesIds?: string[],
+        public proficienciesIds?: string[],
         // Student-specific data
-        readonly interestedClassCategoryIds?: string[],
+        public interestedClassCategoryIds?: string[],
     ) { }
 }
 
