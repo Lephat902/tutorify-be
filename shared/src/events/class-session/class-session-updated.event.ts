@@ -7,11 +7,13 @@ export class ClassSessionUpdatedEventPattern {
 export class ClassSessionUpdatedEventPayload {
     constructor(
         readonly classSessionId: string,
+        readonly classId: string,
         readonly title: string,
         readonly startDatetime: Date,
         readonly endDatetime: Date,
         readonly isCancelled: boolean,
         readonly updatedAt: Date,
+        readonly feedbackUpdatedAt: Date,
     ) { }
 }
 

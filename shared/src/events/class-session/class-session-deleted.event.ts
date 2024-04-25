@@ -6,8 +6,12 @@ export class ClassSessionDeletedEventPattern {
 
 export class ClassSessionDeletedEventPayload {
     constructor(
-        readonly deleteSessionTutorId: string,
         readonly classSessionId: string,
+        readonly classId: string,
+        readonly title: string,
+        readonly startDatetime: Date,
+        readonly endDatetime: Date,
+        readonly updatedAt: Date,
     ) { }
 }
 
