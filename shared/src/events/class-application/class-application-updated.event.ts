@@ -7,6 +7,7 @@ export class ClassApplicationUpdatedEventPattern {
 export class ClassApplicationUpdatedEventPayload {
     constructor(
         readonly classApplicationId: string,
+        readonly isDesignated: boolean,
         readonly classId: string,
         readonly tutorId: string,
         readonly newStatus: ApplicationStatus,
