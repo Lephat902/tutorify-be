@@ -13,6 +13,7 @@ export class ClassSessionUpdatedEventPayload {
         readonly endDatetime: Date,
         readonly isCancelled: boolean,
         readonly updatedAt: Date,
+        readonly tutorFeedback: string,
         readonly feedbackUpdatedAt: Date,
     ) { }
 }
