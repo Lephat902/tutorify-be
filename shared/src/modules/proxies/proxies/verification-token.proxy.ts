@@ -9,6 +9,12 @@ export class VerificationTokenProxy {
         @Inject(QueueNames.VERIFICATION_TOKEN) private readonly client: ClientProxy,
     ) { }
 
+    verify(token: string) {
+        return firstValueFrom(
+            this.client.send<string>({ cmd: 'verify' }, token)
+        );
+    }
+
     createNewToken(userId: string) {
         return firstValueFrom(
             this.client.send<string>({ cmd: 'insert' }, userId)

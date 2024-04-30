@@ -31,4 +31,13 @@ export class MailerProxy {
             })
         );
     }
+
+    async sendResetPassword(user: User, token: string) {
+        await firstValueFrom(
+            this.client.send<string>({ cmd: 'resetPassword' }, {
+                user: { name: user.firstName, email: user.email },
+                token,
+            })
+        );
+    }
 }
