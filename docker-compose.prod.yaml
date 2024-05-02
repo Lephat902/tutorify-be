@@ -1,6 +1,6 @@
 services:
   api-gateway:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-api-gateway:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-api-gateway:prod
     restart: on-failure
     ports:
       - "3000:3000"
@@ -10,12 +10,10 @@ services:
     environment:
       NODE_ENV: production
     env_file: ./api-gateway/.env.example
-    depends_on:
-      - rabbitmq
 
 
   auth:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-auth:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-auth:prod
     restart: on-failure
     build:
       context: ./auth
@@ -26,7 +24,7 @@ services:
 
 
   mailer:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-mailer:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-mailer:prod
     restart: on-failure
     build:
       context: ./mailer
@@ -37,7 +35,7 @@ services:
 
 
   verification-token:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-verification-token:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-verification-token:prod
     restart: on-failure
     build:
       context: ./verification-token
@@ -48,7 +46,7 @@ services:
 
 
   feedback:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-feedback:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-feedback:prod
     restart: on-failure
     build:
       context: ./feedback
@@ -59,7 +57,7 @@ services:
 
 
   files:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-files:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-files:prod
     restart: on-failure
     build:
       context: ./files
@@ -70,7 +68,7 @@ services:
 
 
   class-and-category:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-class-and-category:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-class-and-category:prod
     restart: on-failure
     build:
       context: ./class-and-category
@@ -81,7 +79,7 @@ services:
 
 
   tutor-apply-for-class:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-apply-for-class:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-tutor-apply-for-class:prod
     restart: on-failure
     build:
       context: ./tutor-apply-for-class
@@ -92,7 +90,7 @@ services:
 
 
   student-favorite-tutor:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-student-favorite-tutor:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-student-favorite-tutor:prod
     restart: on-failure
     build:
       context: ./student-favorite-tutor
@@ -103,7 +101,7 @@ services:
 
 
   tutor-query:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-tutor-query:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-tutor-query:prod
     restart: on-failure
     build:
       context: ./tutor-query
@@ -113,7 +111,7 @@ services:
     env_file: ./tutor-query/.env.example
 
   address:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-address:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-address:prod
     restart: on-failure
     build:
       context: ./address
@@ -123,7 +121,7 @@ services:
     env_file: ./address/.env.example
 
   class-session:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-class-session:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-class-session:prod
     restart: on-failure
     build:
       context: ./class-session
@@ -133,7 +131,7 @@ services:
     env_file: ./class-session/.env.example
 
   report:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-report:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-report:prod
     restart: on-failure
     build:
       context: ./report
@@ -143,7 +141,7 @@ services:
     env_file: ./report/.env.example
 
   user-preferences:
-    image: registry.digitalocean.com/tutorify-registry/tutorify-be-user-preferences:prod
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-user-preferences:prod
     restart: on-failure
     build:
       context: ./user-preferences
@@ -157,6 +155,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq

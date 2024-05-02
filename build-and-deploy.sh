@@ -3,7 +3,7 @@
 # Function to push Docker image to registry
 push_docker_image() {
     local service_name=$1
-    docker push "registry.digitalocean.com/tutorify-registry/tutorify-be-${service_name}:prod"
+    docker push "asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-${service_name}:prod"
 }
 
 # Function to restart Kubernetes deployment
