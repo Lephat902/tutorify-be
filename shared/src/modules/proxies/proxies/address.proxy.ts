@@ -35,7 +35,25 @@ export class AddressProxy extends BaseProxy {
         );
     }
 
-    async getWardHierarchyById(wardId: string, timeoutDuration?: number) {
+    async getProvinceByProvinceCode(provinceId: string, timeoutDuration?: number) {
+        if (!provinceId) return null;
+        return this.sendRequest<AdministrativeSubdivisionResponseDto>(
+            'getProvinceByProvinceCode',
+            provinceId,
+            timeoutDuration
+        );
+    }
+
+    async getFullAddressByDistrictCode(districtId: string, timeoutDuration?: number) {
+        if (!districtId) return null;
+        return this.sendRequest<AdministrativeSubdivisionResponseDto>(
+            'getFullAddressByDistrictCode',
+            districtId,
+            timeoutDuration
+        );
+    }
+
+    async getFullAddressByWardCode(wardId: string, timeoutDuration?: number) {
         if (!wardId) return null;
         return this.sendRequest<AdministrativeSubdivisionResponseDto>(
             'getFullAddressByWardCode',
