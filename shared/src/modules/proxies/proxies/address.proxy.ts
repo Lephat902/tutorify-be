@@ -62,10 +62,10 @@ export class AddressProxy extends BaseProxy {
         );
     }
 
-    async getProvinceByProvinceIdByProvinceSlug(provinceSlug: string, timeoutDuration?: number) {
+    async getProvinceByProvinceSlug(provinceSlug: string, timeoutDuration?: number) {
         if (!provinceSlug) return null;
         return this.sendRequest<AdministrativeSubdivisionResponseDto>(
-            'getProvinceByProvinceIdByProvinceSlug',
+            'getProvinceByProvinceSlug',
             provinceSlug,
             timeoutDuration
         );
