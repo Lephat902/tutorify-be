@@ -40,3 +40,9 @@
 [submodule "user-preferences"]
 	path = user-preferences
 	url = https://github.com/Lephat902/tutorify-be-user-preferences
+[submodule "nginx"]
+	path = nginx
+	url = https://github.com/Lephat902/tutorify-be-nginx.git
+[submodule "notification"]
+	path = notification
+	url = https://github.com/Lephat902/tutorify-be-notification.git

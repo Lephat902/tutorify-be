@@ -16,6 +16,13 @@ services:
       - rabbitmq
 
 
+  nginx:
+    ports:
+      - "80:80"
+    build:
+      context: ./nginx
+
+
   auth:
     image: tutorify-be-auth:dev
     restart: no
@@ -179,6 +186,21 @@ services:
       NODE_ENV: development
     volumes:
       - ./user-preferences:/usr/src/app
+      - ./shared:/usr/src/shared
+
+
+  notification:
+    image: tutorify-be-notification:dev
+    restart: no
+    build:
+      context: ./notification
+      target: development
+    ports:
+      - "8000:3000"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./notification:/usr/src/app
       - ./shared:/usr/src/shared
 
 
