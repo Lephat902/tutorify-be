@@ -4,6 +4,7 @@ export interface AdministrativeSubdivisionResponseDto {
     nameEn: string;
     fullName: string;
     fullNameEn: string;
-    codeName: string;
+    // codeName: string;
+    slug: string;
     administrativeUnitId: number;
 }

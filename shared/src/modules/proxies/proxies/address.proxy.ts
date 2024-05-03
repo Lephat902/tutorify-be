@@ -62,6 +62,33 @@ export class AddressProxy extends BaseProxy {
         );
     }
 
+    async getProvinceByProvinceSlug(provinceSlug: string, timeoutDuration?: number) {
+        if (!provinceSlug) return null;
+        return this.sendRequest<AdministrativeSubdivisionResponseDto>(
+            'getProvinceByProvinceSlug',
+            provinceSlug,
+            timeoutDuration
+        );
+    }
+
+    async getFullAddressByDistrictSlug(districtSlug: string, timeoutDuration?: number) {
+        if (!districtSlug) return null;
+        return this.sendRequest<AdministrativeSubdivisionResponseDto>(
+            'getFullAddressByDistrictSlug',
+            districtSlug,
+            timeoutDuration
+        );
+    }
+
+    async getFullAddressByWardSlug(wardSlug: string, timeoutDuration?: number) {
+        if (!wardSlug) return null;
+        return this.sendRequest<AdministrativeSubdivisionResponseDto>(
+            'getFullAddressByWardSlug',
+            wardSlug,
+            timeoutDuration
+        );
+    }
+
     getGeocodeFromAddressAndWardId(address: string, wardId: string, timeoutDuration?: number): Promise<GeocodeResponseDto> {
         return this.sendRequest<GeocodeResponseDto>('getGeocodeFromAddressAndWardId', { address, wardId }, timeoutDuration);
     }
