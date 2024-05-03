@@ -35,10 +35,10 @@ export class AddressProxy extends BaseProxy {
         );
     }
 
-    async getProvinceByProvinceCode(provinceId: string, timeoutDuration?: number) {
+    async getProvinceByProvinceId(provinceId: string, timeoutDuration?: number) {
         if (!provinceId) return null;
         return this.sendRequest<AdministrativeSubdivisionResponseDto>(
-            'getProvinceByProvinceCode',
+            'getProvinceByProvinceId',
             provinceId,
             timeoutDuration
         );
@@ -62,10 +62,10 @@ export class AddressProxy extends BaseProxy {
         );
     }
 
-    async getProvinceByProvinceSlug(provinceSlug: string, timeoutDuration?: number) {
+    async getProvinceByProvinceIdByProvinceSlug(provinceSlug: string, timeoutDuration?: number) {
         if (!provinceSlug) return null;
         return this.sendRequest<AdministrativeSubdivisionResponseDto>(
-            'getProvinceByProvinceSlug',
+            'getProvinceByProvinceIdByProvinceSlug',
             provinceSlug,
             timeoutDuration
         );
