@@ -150,6 +150,16 @@ services:
       NODE_ENV: production
     env_file: ./user-preferences/.env.example
 
+  notification:
+    image: asia-southeast1-docker.pkg.dev/ace-computer-422002-u9/tutorify-docker-repo/tutorify-be-notification:prod
+    restart: on-failure
+    build:
+      context: ./notification
+      target: production
+    environment:
+      NODE_ENV: production
+    env_file: ./notification/.env.example
+
   rabbitmq:
     image: rabbitmq:3-management-alpine
     ports:
