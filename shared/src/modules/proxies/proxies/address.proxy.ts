@@ -104,4 +104,16 @@ export class AddressProxy extends BaseProxy {
     getGeocodeFromProvinceId(provinceId: string, timeoutDuration?: number): Promise<GeocodeResponseDto> {
         return this.sendRequest<GeocodeResponseDto>('getGeocodeFromProvinceId', provinceId, timeoutDuration);
     }
+
+    getGeocodeFromWardSlug(wardSlug: string, timeoutDuration?: number): Promise<GeocodeResponseDto> {
+        return this.sendRequest<GeocodeResponseDto>('getGeocodeFromWardSlug', wardSlug, timeoutDuration);
+    }
+
+    getGeocodeFromDistrictSlug(districtSlug: string, timeoutDuration?: number): Promise<GeocodeResponseDto> {
+        return this.sendRequest<GeocodeResponseDto>('getGeocodeFromDistrictSlug', districtSlug, timeoutDuration);
+    }
+
+    getGeocodeFromProvinceSlug(provinceSlug: string, timeoutDuration?: number): Promise<GeocodeResponseDto> {
+        return this.sendRequest<GeocodeResponseDto>('getGeocodeFromProvinceSlug', provinceSlug, timeoutDuration);
+    }
 }
