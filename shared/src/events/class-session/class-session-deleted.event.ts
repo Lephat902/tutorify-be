@@ -8,6 +8,7 @@ export class ClassSessionDeletedEventPayload {
     constructor(
         readonly classSessionId: string,
         readonly classId: string,
+        readonly tutorId: string,
         readonly title: string,
         readonly startDatetime: Date,
         readonly endDatetime: Date,

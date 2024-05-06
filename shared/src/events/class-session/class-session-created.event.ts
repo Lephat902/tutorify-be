@@ -7,6 +7,7 @@ export class ClassSessionCreatedEventPattern {
 export class ClassSessionCreatedEventPayload {
     constructor(
         readonly classSessionId: string,
+        readonly tutorId: string,
         readonly classId: string,
         readonly title: string,
         readonly startDatetime: Date,
