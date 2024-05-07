@@ -202,7 +202,8 @@ services:
     volumes:
       - ./notification:/usr/src/app
       - ./shared:/usr/src/shared
-
+    depends_on:
+      - rabbitmq
 
   rabbitmq:
     restart: no
@@ -210,6 +211,3 @@ services:
     ports:
       - "5672:5672"
       - "15672:15672"
-    volumes:
-      - ~/.docker-conf/rabbitmq/data/:/var/lib/rabbitmq/
-      - ~/.docker-conf/rabbitmq/log/:/var/log/rabbitmq
