@@ -1,5 +1,5 @@
-import { StoredLocation } from "../../dtos";
-import { UserRole } from "../../enums";
+import { FileUploadResponseDto, StoredLocation } from "../../dtos";
+import { Gender, UserRole } from "../../enums";
 
 export class UserCreatedEventPattern {
     readonly pattern: string = 'auth.user-created';
@@ -10,10 +10,12 @@ export class UserCreatedEventPayload {
         readonly userId: string,
         readonly username: string,
         readonly email: string,
+        readonly gender: Gender,
         readonly firstName: string,
         readonly middleName: string,
         readonly lastName: string,
         readonly role: UserRole,
+        readonly avatar: FileUploadResponseDto,
         readonly location: StoredLocation,
         // Tutor-specific data
         readonly proficienciesIds?: string[],
