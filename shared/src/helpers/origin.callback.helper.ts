@@ -8,7 +8,6 @@ const isDomainAllowed = (origin: string, allowedDomains: string[]): boolean => {
 const isRegexAllowed = (origin: string, encodedRegexes: string[]): boolean => {
     for (const encodedRegex of encodedRegexes) {
         const decodedRegex = Buffer.from(encodedRegex, 'base64').toString('ascii');
-        console.log(decodedRegex);
         const regex = new RegExp(decodedRegex);
         if (regex.test(origin)) {
             return true;
