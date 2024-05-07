@@ -8,6 +8,7 @@ import { ClientsModule, Transport } from '@nestjs/microservices';
 import { QueueNames } from '../../enums';
 import { ConfigService } from '@nestjs/config';
 import { AuthProxy } from './proxies/auth.proxy';
+import { ClassProxy } from './proxies/class.proxy';
 
 const Proxies = [
     AddressProxy,
@@ -16,6 +17,7 @@ const Proxies = [
     MailerProxy,
     UserPreferencesProxy,
     VerificationTokenProxy,
+    ClassProxy,
 ]
 
 @Module({

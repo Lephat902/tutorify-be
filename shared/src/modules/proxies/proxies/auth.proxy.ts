@@ -11,7 +11,7 @@ export class AuthProxy extends BaseProxy {
         super(client);
     }
 
-    async getUserById(userId: string, timeoutDuration?: number) {
+    async getUserById<T>(userId: string, timeoutDuration?: number): Promise<T> {
         return this.sendRequest(
             'getUserById',
             userId,
