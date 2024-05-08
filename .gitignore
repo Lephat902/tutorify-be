@@ -49,3 +49,6 @@ pnpm-lock.yaml
 
 # deployment
 /k8s
+
+# data backup
+/backup
