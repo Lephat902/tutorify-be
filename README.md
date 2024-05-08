@@ -1,46 +1,39 @@
 
 
-## 1. Cách chạy development:
-Để chạy **development** cho toàn hệ thống:
-1. Vào thư mục `tutorify-be`
-2. Gõ
- ```bash
- # Bỏ flag --build đi cho nhẹ nếu không có thay đổi gì về docker-compose hay Dockerfile hoặc các package của service
- docker compose -f docker-compose.dev.yaml up --build
+
+## 1. Running the App in Development Mode
+To run the app in  **development**  mode, follow these steps:
+1.  Navigate to the  `tutorify-be`  directory.
+2.  Run the following command in the terminal: 
+```bash
+ docker compose -f docker-compose.dev.yaml up
  ```
 
-Nếu chỉ muốn chạy cho một số service nhất định thì cung cấp tên của các service đó:
+If you only need specific services, list them as arguments. For example, to run  `api-gateway`  and  `auth`, use:
  ```bash
- # Giả sử muốn chạy api-gateway và auth
+ # Suppose you want to run api-gateway và auth
  docker compose -f docker-compose.dev.yaml up api-gateway auth
  ```
 
-Muốn stop tất cả thì: 
+To stop the currently running services, use:
  ```bash
- # Nếu Ctrl + C không được thì dùng cái này
+ # Ctrl + C will leave rabbitmq running
  docker compose -f docker-compose.dev.yaml stop
  ```
 
-Muốn stop một container nhất định thì:
+You can also choose specific services to stop:
  ```bash
- # Kiếm id
+ # Look up the id
 docker ps
 docker stop <id>
  ```
 
-Trong mỗi container, khi mọi người có thay đổi về gói (install, uninstall,...) mà không thấy có sự biến chuyển gì (vd, vẫn báo lỗi,...) thì chạy lệnh sau:
-```bash
-# Giả sử mới thay đổi package ở app 'auth'
-# -V: https://docs.docker.com/engine/reference/commandline/compose_up/#:~:text=%2D%2Drenew%2Danon%2Dvolumes
-docker compose -f docker-compose.dev.yaml up --build -V auth # --flag -V
-```
+## 2. Manage Repositories:
+We utilize git’s submodule functionality.
 
-## 2. Về Quản lý Repo:
-Chúng ta sử dụng khái niệm submodule của git
-
-**Tình huống 1:** Tạo một submodule mới (dành cho microservice mới)
-1. Tạo repo riêng cho thư mục đó trên Github
-2. Vào thư mục con đó:
+**Use case 1:** Create a new submodule
+1. Create a new repository on a platform like GitHub.
+2. Navigate to the submodule directory:
 ```bash
 # Navigate to the service subfolder
 cd tutorify-be/<service-name>
@@ -62,7 +55,7 @@ git remote add origin https://github.com/Lephat902/tutorify-be-<service-name>.gi
 git push -u origin main
 ```
 
-3. Thêm submodule vào thư mục gốc:
+3. Add the submodule to the root repository:
 ```bash
 # Add the service submodule
 git submodule add https://github.com/Lephat902/tutorify-be-<service-name>.git <service-name>
@@ -71,32 +64,30 @@ git submodule add https://github.com/Lephat902/tutorify-be-<service-name>.git <s
 git commit -m "Added submodule <service-name>"
 ```
 
-4. Cuối cùng, đưa các thay đổi lên root repo trên Github
+4. Finally, push all the changes to the online Git repository
 ```bash
 git push -u origin main
 ```
 
-**Tình huống 2:** Clone các services xuống một lần
+**Use case 2:** Clone services all at once
 ```bash
 git clone --recurse-submodules https://github.com/Lephat902/tutorify-be.git
 ```
 
-## 3. Cách sử dụng thư mục `shared`:
-Hệ thống chúng ta sử dụng thư mục `shared` để chứa một số *dtos* phổ biến và các hàm *helpers* nhằm giúp tăng tính tái sử dụng giữa các microservices.
-Sau đây là các bước cần thiết để việc sử dụng thư mục `shared` trở nên thành công:
-**Với mục đích dev:**
-1. Vào docker-compose.dev, mount thư mục shared vào container:
+## 3. Use `shared` directory:
+Our service uses the  `shared`  directory to reuse common  `dtos`,  `helpers`,  `events`,  `proxies`, etc. To use the  `shared`  directory effectively:
+**For local development:**
+1.  Open  `docker-compose.dev.yaml`  in a text editor and add the following line to services that need to use the  `shared`  directory:
 ```bash
 volumes:
-  - ./class-and-category:/usr/src/app
+  - ./<service_name>:/usr/src/app
   - ./shared:/usr/src/shared  <------ this line
-  - /usr/src/app/node_modules
 ```
-2. Vào thư mục của microservice
+2. Change directory to the above service:
 
 2.1. `tsconfig.json`
 ```json
-// Thêm bên trong thuộc tính compilerOptions
+// Config new paths under compilerOptions attribute
 "compilerOptions": {
   ...,
   "paths": {
@@ -111,7 +102,8 @@ volumes:
 ```
 2.2. `nest-cli.json`
 ```json
-// Do có thư viện shared nên cấu trúc dist đã bị thay đổi
+// Due to the usage of shared dir, the dist structure then changes
+// Notice that despite doing the above steps, if the shared dir is not used anywhere in the code, the dist structure will be the same as normal and entryFile should be './main.js'
 {
   "$schema": "https://json.schemastore.org/nest-cli",
   "collection": "@nestjs/schematics",
@@ -122,61 +114,34 @@ volumes:
   }
 }
 ```
-**Với mục đích prod:**
-Bên cạnh các bước kể trên dev, còn những lưu ý quan trọng như sau:
-1. Thay đổi Dockerfile: 
+**For production:**
+
+In addition to the steps for development, you need to:
+1. Update the Dockerfile: 
 ```dockerfile
 ... # OTHER CODES
-COPY --chown=node:node package*.json ./
+# Switch to app dir
+WORKDIR /usr/src/app
 
 # Copy temp 'shared' dir
 COPY --chown=node:node ./shared /usr/src/shared # <---- this line 
-  
-COPY --chown=node:node . .
 
-... # OTHER CODES
-
-# the 'npm ci' cmd requires root access
-USER root
-
-# Switch to shared dir
-WORKDIR /usr/src/shared # <---- this line 
-
-# Install packages
-RUN npm ci --only=production # <---- this line 
-
-# Switch back to app dir
-WORKDIR /usr/src/app # <---- this line 
-
-# Run the build command which creates the production bundle
-RUN npm run build
-... # OTHER CODES
 ```
-Ngoài ra còn phải đổi câu lệnh run production:
+Update the run command:
 ```dockerfile
 # Start the server using the production build
 CMD [ "node", "dist/app/src/main.js" ]
 ```
 
-2. Câu lệnh dùng khi build hiện tại sẽ là:
+2. Build services:
 ```bash
-# build toàn bộ
-./prod-build.sh
-# build một vài image, vd, api-gateway, auth
-./prod-build.sh api-gateway auth 
+# build all services
+./build-and-deploy.sh
+# build some images
+./build-and-deploy.sh api-gateway auth 
 ```
 
-Sau đó có thể run production như bình thường:
+Run the production images as development ones:
 ```bash
  docker compose -f docker-compose.prod.yaml up
-```
-
-## 4. Phụ lục:
-1. Build production để làm gì?
-Production do đã được lược bỏ nhiều packages chỉ dùng cho dev phase (devDependencies) nên sẽ nhẹ hơn nhiều so với dev
-```bash
-phatle@localhost:~/$ docker images
-REPOSITORY                                           TAG                   IMAGE ID       CREATED        SIZE
-tutorify.azurecr.io/tutorify-be-api-gateway          prod                  226ab062bd90   6 hours ago    178MB
-tutorify-be-api-gateway                              dev                   ddd1b46e5566   8 hours ago    416MB
 ```
