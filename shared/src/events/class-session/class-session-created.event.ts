@@ -13,6 +13,8 @@ export class ClassSessionCreatedEventPayload {
         readonly startDatetime: Date,
         readonly endDatetime: Date,
         readonly createdAt: Date,
+        readonly isFirstSessionInBatch: boolean,
+        readonly numOfSessionsCreatedInBatch: number,
     ) { }
 }
 
