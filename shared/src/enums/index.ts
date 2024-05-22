@@ -7,3 +7,4 @@ export * from "./queue-names.enum";
 export * from "./sorting-direction.enum";
 export * from "./report";
 export * from "./feedback";
+export * from "./statistic";
