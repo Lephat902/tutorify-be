@@ -5,3 +5,4 @@ export * from './clean-aggregate-object.helper';
 export * from './have-manager-permission.helper';
 export * from './origin.callback.helper';
 export * from './get-quarter.helper';
+export * from './merge-object-by-id.helper';
