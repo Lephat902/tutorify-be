@@ -1,29 +1,29 @@
 import { QueueNames } from "../../enums";
 
-export class ClassSessionCreatedEventPattern {
-    readonly pattern: string = `${QueueNames.CLASS_SESSION}.class-session-created`;
+export class MultiClassSessionsCreatedEventPattern {
+    readonly pattern: string = `${QueueNames.CLASS_SESSION}.multiple-class-sessions-created`;
 }
 
-export class ClassSessionCreatedEventPayload {
+export class MultiClassSessionsCreatedEventPayload {
     constructor(
         readonly classSessionId: string,
         readonly tutorId: string,
         readonly classId: string,
-        readonly title: string,
-        readonly startDatetime: Date,
-        readonly endDatetime: Date,
+        readonly sessionsDetails: {
+            readonly title: string,
+            readonly startDatetime: Date,
+            readonly endDatetime: Date,
+        }[],
         readonly createdAt: Date,
-        readonly isFirstSessionInBatch: boolean,
-        readonly numOfSessionsCreatedInBatch: number,
     ) { }
 }
 
-export class ClassSessionCreatedEvent {
-    readonly pattern: ClassSessionCreatedEventPattern;
+export class MultiClassSessionsCreatedEvent {
+    readonly pattern: MultiClassSessionsCreatedEventPattern;
 
     constructor(
-        readonly payload: ClassSessionCreatedEventPayload,
-    ) { 
-        this.pattern = new ClassSessionCreatedEventPattern();
+        readonly payload: MultiClassSessionsCreatedEventPayload,
+    ) {
+        this.pattern = new MultiClassSessionsCreatedEventPattern();
     }
 }
