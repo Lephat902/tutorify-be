@@ -22,9 +22,6 @@
 [submodule "tutor-apply-for-class"]
 	path = tutor-apply-for-class
 	url = https://github.com/Lephat902/tutorify-be-tutor-apply-for-class.git
-[submodule "student-favorite-tutor"]
-	path = student-favorite-tutor
-	url = https://github.com/Lephat902/tutorify-be-student-favorite-tutor
 [submodule "tutor-query"]
 	path = tutor-query
 	url = https://github.com/Lephat902/tutorify-be-tutor-query
